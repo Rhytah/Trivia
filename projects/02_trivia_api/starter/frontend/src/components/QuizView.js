@@ -25,6 +25,7 @@ class QuizView extends Component {
       url: `/categories`, //TODO: update request URL
       type: "GET",
       success: (result) => {
+        console.log('categories------', result.categories)
         this.setState({ categories: result.categories })
         return;
       },
@@ -61,6 +62,7 @@ class QuizView extends Component {
       },
       crossDomain: true,
       success: (result) => {
+        console.log(result, "quizzzzzzzzzzz")
         this.setState({
           showAnswer: false,
           previousQuestions: previousQuestions,
@@ -106,13 +108,14 @@ class QuizView extends Component {
               <div className="category-holder">
                   <div className="play-category" onClick={this.selectCategory}>ALL</div>
                   {Object.keys(this.state.categories).map(id => {
+                    id=parseInt(id)+1
                   return (
                     <div
                       key={id}
                       value={id}
                       className="play-category"
                       onClick={() => this.selectCategory({type:this.state.categories[id], id})}>
-                      {this.state.categories[id]}
+                      {this.state.categories[id -1 ]}
                     </div>
                   )
                 })}
