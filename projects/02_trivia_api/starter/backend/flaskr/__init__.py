@@ -86,7 +86,6 @@ def create_app(test_config=None):
       questions = Question.query.all()
       categories = get_all_categories()
       categories = json.loads(categories[0].get_data())
-      print (categories)
       formatted_questions=[question.format() for question in questions]
       return jsonify({
         'questions': formatted_questions[start:end],
@@ -132,7 +131,7 @@ def create_app(test_config=None):
     def add_question():
       #get user input 
       data = request.get_json()
-      print(data)
+      
       #assign values to keys as question values and add new question object
       question = data['question']
       answer = data['answer']
@@ -177,7 +176,6 @@ def create_app(test_config=None):
       for question in current_questions:
           if search_term.lower() in question['question'].lower():
               questions.append(question)
-      print(questions)
       categories = []
       all_categories = Category.query.all()
       for item in all_categories:
@@ -243,9 +241,6 @@ def create_app(test_config=None):
     '''
     @app.route('/quizzes', methods=['POST'])
     def get_quiz_questions():
-      '''
-        Endpoint to get questions to play quiz
-      '''
       data = request.get_json()
 
       category = data['quiz_category']
